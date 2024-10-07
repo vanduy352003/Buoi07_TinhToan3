@@ -34,16 +34,41 @@ namespace Buoi07_TinhToan3
 
         private void btnTinh_Click(object sender, EventArgs e)
         {
-            //lấy giá trị của 2 ô số
             double so1, so2, kq = 0;
-            so1 = double.Parse(txtSo1.Text);
-            so2 = double.Parse(txtSo2.Text);
-            //Thực hiện phép tính dựa vào phép toán được chọn
+
+            // Kiểm tra dữ liệu hợp lệ cho ô "Số thứ nhất"
+            if (!double.TryParse(txtSo1.Text, out so1))
+            {
+                MessageBox.Show("Dữ liệu của ô Số thứ nhất không được rỗng. Vui lòng nhập một số.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSo1.Focus();               
+                txtSo1.SelectAll();           
+                return;                     
+            }
+
+            // Tiếp tục kiểm tra dữ liệu của ô "Số thứ hai"
+            if (!double.TryParse(txtSo2.Text, out so2))
+            {
+                MessageBox.Show("Dữ liệu của ô Số thứ hai không được rỗng. Vui lòng nhập một số.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSo2.Focus();                
+                txtSo2.SelectAll();            
+                return;                       
+            }
+
+            // Thực hiện phép tính dựa vào phép toán được chọn
             if (radCong.Checked) kq = so1 + so2;
             else if (radTru.Checked) kq = so1 - so2;
             else if (radNhan.Checked) kq = so1 * so2;
-            else if (radChia.Checked && so2 != 0) kq = so1 / so2;
-            //Hiển thị kết quả lên trên ô kết quả
+            else if (radChia.Checked)
+            {
+                if (so2 == 0)
+                {
+                    MessageBox.Show("Không thể chia cho 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                kq = so1 / so2;
+            }
+
+            // Hiển thị kết quả lên trên ô kết quả
             txtKq.Text = kq.ToString();
         }
 
@@ -65,6 +90,24 @@ namespace Buoi07_TinhToan3
         private void txtSo2_Enter(object sender, EventArgs e)
         {
             txtSo2.SelectAll();
+        }
+
+        private void txtSo1_Leave(object sender, EventArgs e)
+        {
+            /*if (string.IsNullOrWhiteSpace(txtSo1.Text))
+            {
+                MessageBox.Show("Ô số thứ nhất không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSo1.Focus();
+            }*/
+        }
+
+        private void txtSo2_Leave(object sender, EventArgs e)
+        {
+            /*if (string.IsNullOrWhiteSpace(txtSo2.Text))
+            {
+                MessageBox.Show("Ô số thứ hai không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSo2.Focus();  
+            }*/
         }
     }
 }
