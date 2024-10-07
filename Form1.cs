@@ -66,5 +66,23 @@ namespace Buoi07_TinhToan3
         {
             txtSo2.SelectAll();
         }
+
+        private void txtSo1_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSo1.Text))
+            {
+                MessageBox.Show("Ô số thứ nhất không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSo1.Focus();  
+            }
+        }
+
+        private void txtSo2_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSo2.Text))
+            {
+                MessageBox.Show("Ô số thứ hai không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSo2.Focus();  
+            }
+        }
     }
 }
