@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,6 +31,39 @@ namespace Buoi07_TinhToan3
                                  "Thông báo", MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes)
                 this.Close();
+        }
+
+        private bool isMoreThan31Charactors(string txtSo)
+        {
+            try
+            {
+                DialogResult dr;
+                bool isValidNumber = double.TryParse(txtSo, out double result);
+                if(!isValidNumber)
+                {
+                    dr = MessageBox.Show("Vui lòng chỉ nhập kí tự số", "Thông báo lỗi", MessageBoxButtons.RetryCancel);
+                    if (dr == DialogResult.Retry)
+                    {
+                        this.DialogResult = DialogResult.Cancel;
+                    }
+                    return false;
+                }
+                if (txtSo.Length > 31)
+                {
+                    dr = MessageBox.Show("Không được nhập quá 31 kí tự số", "Thông báo lỗi", MessageBoxButtons.RetryCancel);
+                    if (dr == DialogResult.Retry)
+                    {
+                        this.DialogResult = DialogResult.Cancel;
+                    }
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
 
         private void btnTinh_Click(object sender, EventArgs e)
@@ -65,6 +99,24 @@ namespace Buoi07_TinhToan3
         private void txtSo2_Enter(object sender, EventArgs e)
         {
             txtSo2.SelectAll();
+        }
+
+        private void txtSo1_Leave(object sender, EventArgs e)
+        {
+            bool isValidNumber = this.isMoreThan31Charactors(txtSo1.Text);
+            if (!isValidNumber)
+            {
+                txtSo1.Focus();
+            }
+        }
+
+        private void txtSo2_Leave(object sender, EventArgs e)
+        {
+            bool isValidNumber = this.isMoreThan31Charactors(txtSo2.Text);
+            if (!isValidNumber)
+            {
+                txtSo2.Focus();
+            }
         }
     }
 }
