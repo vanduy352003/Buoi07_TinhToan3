@@ -58,6 +58,13 @@ namespace Buoi07_TinhToan3
             else if (radTru.Checked) kq = so1 - so2;
             else if (radNhan.Checked) kq = so1 * so2;
             else if (radChia.Checked && so2 != 0) kq = so1 / so2;
+            else if (radChia.Checked && so2 == 0) //chia cho 0
+            {
+                MessageBox.Show("Không thể chia một số cho 0", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSo2.Focus();
+                return;
+            }
+            
             //Hiển thị kết quả lên trên ô kết quả
             txtKq.Text = kq.ToString();
         }
@@ -94,6 +101,11 @@ namespace Buoi07_TinhToan3
                 MessageBox.Show("Ô số thứ nhất không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtSo1.Focus();  
             }
+            if (!double.TryParse(txtSo1.Text, out _))
+            {
+                MessageBox.Show("Ô số thứ nhất phải là số hợp lệ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSo1.Focus();
+            }
         }
 
         private void txtSo2_Leave(object sender, EventArgs e)
@@ -107,6 +119,11 @@ namespace Buoi07_TinhToan3
             {
                 MessageBox.Show("Ô số thứ hai không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtSo2.Focus();  
+            }
+            if (!double.TryParse(txtSo2.Text, out _))
+            {
+                MessageBox.Show("Ô số thứ hai phải là số hợp lệ", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSo2.Focus();
             }
         }
 
