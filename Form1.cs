@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -38,7 +37,7 @@ namespace Buoi07_TinhToan3
             DialogResult dr;
             if (txtSo.Length > 31)
             {
-                dr = MessageBox.Show("Không được nhập quá 31 kí tự số", "Thông báo lỗi", MessageBoxButtons.RetryCancel);
+                dr = MessageBox.Show("Không được nhập quá 31 kí tự số", "Thông báo lỗi", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                 if (dr == DialogResult.Retry)
                 {
                     this.DialogResult = DialogResult.Cancel;
@@ -85,19 +84,29 @@ namespace Buoi07_TinhToan3
 
         private void txtSo1_Leave(object sender, EventArgs e)
         {
-            bool isValidNumber = this.isMoreThan31Charactors(txtSo1.Text);
-            if (!isValidNumber)
+            bool isValid = this.isMoreThan31Charactors(txtSo1.Text);
+            if (!isValid)
             {
                 txtSo1.Focus();
+            }
+            if (string.IsNullOrWhiteSpace(txtSo1.Text))
+            {
+                MessageBox.Show("Ô số thứ nhất không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSo1.Focus();  
             }
         }
 
         private void txtSo2_Leave(object sender, EventArgs e)
         {
-            bool isValidNumber = this.isMoreThan31Charactors(txtSo2.Text);
-            if (!isValidNumber)
+            bool isValid = this.isMoreThan31Charactors(txtSo2.Text);
+            if (!isValid)
             {
                 txtSo2.Focus();
+            }
+            if (string.IsNullOrWhiteSpace(txtSo2.Text))
+            {
+                MessageBox.Show("Ô số thứ hai không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSo2.Focus();  
             }
         }
     }
