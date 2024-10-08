@@ -84,5 +84,27 @@ namespace Buoi07_TinhToan3
                 txtSo2.Focus();  
             }
         }
+
+        private void txtSo1_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (!int.TryParse(textBox.Text, out _))
+            {
+                MessageBox.Show("Ô số thứ nhất không được nhập chữ!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBox.Focus(); 
+                e.Cancel = true; 
+            }
+        }
+
+        private void txtSo2_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (!int.TryParse(textBox.Text, out _))
+            {
+                MessageBox.Show("Ô số thứ 2 không được nhập chữ!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBox.Focus(); 
+                e.Cancel = true; 
+            }
+        }
     }
 }
