@@ -35,35 +35,17 @@ namespace Buoi07_TinhToan3
 
         private bool isMoreThan31Charactors(string txtSo)
         {
-            try
+            DialogResult dr;
+            if (txtSo.Length > 31)
             {
-                DialogResult dr;
-                bool isValidNumber = double.TryParse(txtSo, out double result);
-                if(!isValidNumber)
+                dr = MessageBox.Show("Không được nhập quá 31 kí tự số", "Thông báo lỗi", MessageBoxButtons.RetryCancel);
+                if (dr == DialogResult.Retry)
                 {
-                    dr = MessageBox.Show("Vui lòng chỉ nhập kí tự số", "Thông báo lỗi", MessageBoxButtons.RetryCancel);
-                    if (dr == DialogResult.Retry)
-                    {
-                        this.DialogResult = DialogResult.Cancel;
-                    }
-                    return false;
+                    this.DialogResult = DialogResult.Cancel;
                 }
-                if (txtSo.Length > 31)
-                {
-                    dr = MessageBox.Show("Không được nhập quá 31 kí tự số", "Thông báo lỗi", MessageBoxButtons.RetryCancel);
-                    if (dr == DialogResult.Retry)
-                    {
-                        this.DialogResult = DialogResult.Cancel;
-                    }
-                    return false;
-                }
-                return true;
-            }
-            catch (Exception)
-            {
                 return false;
             }
-            
+            return true;
         }
 
         private void btnTinh_Click(object sender, EventArgs e)
