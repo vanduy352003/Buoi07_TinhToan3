@@ -33,6 +33,21 @@ namespace Buoi07_TinhToan3
                 this.Close();
         }
 
+        private bool isMoreThan31Charactors(string txtSo)
+        {
+            DialogResult dr;
+            if (txtSo.Length > 31)
+            {
+                dr = MessageBox.Show("Không được nhập quá 31 kí tự số", "Thông báo lỗi", MessageBoxButtons.RetryCancel);
+                if (dr == DialogResult.Retry)
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                }
+                return false;
+            }
+            return true;
+        }
+
         private void btnTinh_Click(object sender, EventArgs e)
         {
             //lấy giá trị của 2 ô số
